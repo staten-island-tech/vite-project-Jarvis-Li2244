@@ -3,14 +3,15 @@ html, body, *{
   padding: 0;
   box-sizing:border-box;
   font-size: 10px;
+  text-align: center;
 }
 
 :root{
-  --light-blue: #2998FF;
-  --dark-blue: #135cc5;
+  --light-blue: #b3daff;
+  --dark-blue: #074fb4;
 
-  --light-red: #f87171;
-  --dark-red: #dc2626;
+  --light-red: #ffb0b0;
+  --dark-red: #ca2424;
 
   --primary: var(--light-blue);
   --secondary: var(--dark-blue);
@@ -31,4 +32,17 @@ body{
 
 .cool{
   --primary: var(--light-blue);
+}
+
+h1{
+  font-size: var(--h1);
+}
+
+.header{
+  width: 100vw;
+  padding: 1%;
+  background-color: var(--secondary);
+  align-items: center;
+  justify-content: center;
+  position: fixed;
 }
