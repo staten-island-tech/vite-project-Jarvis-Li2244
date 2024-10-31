@@ -7,15 +7,20 @@ html, body, *{
 }
 
 :root{
-  --light-blue: #b3daff;
-  --dark-blue: #074fb4;
+  --light-grey: rgb(150, 150, 150);
+  --white: rgb(223, 223, 223); 
+  --light-white: #ffffff;
+  --blue: #3970c2;
 
-  --light-red: #ffb0b0;
-  --dark-red: #ca2424;
+  --black: #0f0f0f;
+  --light-black: #414141;
+  --grey: #797979;
+  --orange: rgb(228, 83, 0);
 
-  --primary: var(--light-blue);
-  --secondary: var(--dark-blue);
-  --font-color: #001010;
+  --primary: var(--grey);
+  --secondary: var(--light-black);
+  --tertiary: var(--black);
+  --font-color: var(--orange);
 
   --h1: 7.594rem;
 }
@@ -26,12 +31,12 @@ body{
   background-color: var(--primary);
 }
 
-.warm{
+.light{
   --primary: var(--light-red);
 }
 
-.cool{
-  --primary: var(--light-blue);
+.dark{
+  --primary: var(--grey);
 }
 
 h1{
@@ -40,9 +45,24 @@ h1{
 
 .header{
   width: 100vw;
+  background-color: var(--tertiary);
+  align-items: center;
+  position: fixed;
+}
+
+.header-button{
+  width: 100vw;
   padding: 1%;
   background-color: var(--secondary);
   align-items: center;
-  justify-content: center;
-  position: fixed;
+  justify-content: space-evenly;
+}
+
+button{
+  margin: 1%;
+  width: 10%;
+  height: 100%;
+  background-color: white;
+  border: black 0.5rem;
+  border-radius: 0.5rem;
 }
