@@ -1,4 +1,4 @@
-Worlds = [
+const Worlds = [
     {"id": 101, "rarity": "common", "price": 0.4596, "rank": 7855},
     {"id": 102, "rarity": "uncommon", "price": 0.8923, "rank": 4321},
     {"id": 103, "rarity": "rare", "price": 1.2375, "rank": 1254},
@@ -10,4 +10,4 @@ Worlds = [
     {"id": 109, "rarity": "rare", "price": 1.9000, "rank": 1340},
     {"id": 110, "rarity": "epic", "price": 3.3000, "rank": 567}
 ]
-
+export { Worlds };
