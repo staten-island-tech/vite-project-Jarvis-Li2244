@@ -152,6 +152,10 @@ button{
   margin-top: 0.5%;
 }
 
+input{
+  width: 7%;
+}
+
 .box{
   width: 100vw;
   height:100vh;
@@ -162,6 +166,7 @@ button{
   background: url("../JS/images/HytopiaBack.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  position: fixed;
 }
 
 
