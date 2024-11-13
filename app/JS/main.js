@@ -19,128 +19,113 @@ const DOMSelectors = {
     body: document.querySelector("body"),
     start: document.querySelector(".buttonS"),
     box: document.querySelector(".box"),
+    header: document.querySelector(".header"),
+    container: document.querySelector(".container"),
+    all: document.querySelector(".all"),
+    id: document.querySelector(".id"),
+    rarity: document.querySelector(".rarity"),
+    rank: document.querySelector(".rank"),
+    price: document.querySelector(".price"),
 }
+
+let all = document.querySelector(".all")
+let id = document.querySelector(".id")
+let rarity = document.querySelector(".rarity")
+let rank = document.querySelector(".rank")
+let price = document.querySelector(".price")
 
 DOMSelectors.start.addEventListener("click", function(event) {
     event.preventDefault();
     startMark();
-    allCards(Worlds);
 })
 
 function startMark() {
     DOMSelectors.box.remove();
-    DOMSelectors.body.insertAdjacentHTML(
-        "beforeend",
-        `<div class="header">
-            <h1>Hytopia Marketplace</h1>
-            <div class="header-button">
-                <button class="all">All</button>
-                <button class="id">Sort by ID</button>
-                <button class="rarity">Sort by Rarity</button>
-                <button class="rank">Sort by Rank</button>
-                <button class="price">Sort by Price</button>
-            </div>
-        </div>
-        <div class="container">
-            <div class="header-place">
-            </div>
-        </div>`
-        )
-        allButton();
-        idButton();
-        rarityButton();
-        rankButton();
-        priceButton();
+    allCards(Worlds)
 }
 
-function allButton() {
-    let container = document.querySelector(".container")
-    let all = document.querySelector(".all")
-    all.addEventListener("click", function() {
-        container.innerHTML = '<div class="header-place">';
-        allCards(Worlds);
+
+all.addEventListener("click", function(event) {
+    console.log("Test")
+    DOMSelectors.container.innerHTML = '<div class="header-place">';
+    allCards(Worlds);
     }
 ) 
-}
 
-function idButton() {
-    let id = document.querySelector(".id")
-    id.addEventListener("click", function() {
-        addFormID();
-        let form = document.querySelector("form") 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
-            let input1 = document.querySelector(".input1").value
-            let input2 = document.querySelector(".input2").value
-            resetContainer();
-            resetHTML();
-            Worlds
-                .filter(world => world.id >= input1 && world.id <= input2)
-                .forEach(world => addCards(world))
-    })
-    })       
-}
+id.addEventListener("click", function(event) {
+    addFormID();
+    let form = document.querySelector("form") 
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        let input1 = document.querySelector(".input1").value
+        let input2 = document.querySelector(".input2").value
+        resetContainer();
+        resetHTML();
+        Worlds
+            .filter(world => world.id >= input1 && world.id <= input2)
+            .forEach(world => addCards(world))
+        }
+    )
+    }
+)       
 
-function rarityButton() {
-    let rarity = document.querySelector(".rarity")
-    rarity.addEventListener("click", function() {
-        addFormRarity();
-        let form = document.querySelector("form") 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
-            let input = document.querySelector(".input").value
-            resetContainer();
-            resetHTML();
-            Worlds
-                .filter(world => world.rarity == input)
-                .forEach(world => addCards(world))
-    })
-    })       
-}
+rarity.addEventListener("click", function(event) {
+    addFormRarity();
+    let form = document.querySelector("form") 
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        let input = document.querySelector(".input").value
+        resetContainer();
+        resetHTML();
+        Worlds
+            .filter(world => world.rarity == input)
+            .forEach(world => addCards(world))
+        }
+    )
+    }
+)       
 
-function rankButton() {
-    let rank = document.querySelector(".rank")
-    rank.addEventListener("click", function() {
-        addFormRank();
-        let form = document.querySelector("form") 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
-            let input1 = document.querySelector(".input1").value
-            let input2 = document.querySelector(".input2").value
-            resetContainer();
-            resetHTML();
-            Worlds
-                .filter(world => world.rank >= input1 && world.rank <= input2)
-                .forEach(world => addCards(world))
-    })
-    })       
-}
+rank.addEventListener("click", function(event) {
+    addFormRank();
+    let form = document.querySelector("form") 
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        let input1 = document.querySelector(".input1").value
+        let input2 = document.querySelector(".input2").value
+        resetContainer();
+        resetHTML();
+        Worlds
+            .filter(world => world.rank >= input1 && world.rank <= input2)
+            .forEach(world => addCards(world))
+        }
+    )
+    }
+)       
 
-function priceButton() {
-    let price = document.querySelector(".price")
-    price.addEventListener("click", function() {
-        addFormPrice();
-        let form = document.querySelector("form") 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
-            let input1 = document.querySelector(".input1").value
-            let input2 = document.querySelector(".input2").value
-            resetContainer();
-            resetHTML();
-            Worlds
-                .filter(world => world.price >= input1 && world.price <= input2)
-                .forEach(world => addCards(world))
-    })
-    })       
-}
+price.addEventListener("click", function(event) {
+    addFormPrice();
+    let form = document.querySelector("form") 
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        let input1 = document.querySelector(".input1").value
+        let input2 = document.querySelector(".input2").value
+        resetContainer();
+        resetHTML();
+        Worlds
+            .filter(world => world.price >= input1 && world.price <= input2)
+            .forEach(world => addCards(world))
+        event.target.reset()
+        }
+    )
+    }
+)       
 
 function allCards(array) {
     array.forEach(world => addCards(world))
 }
 
 function addCards(world) {
-    let container = document.querySelector(".container")
-    container.insertAdjacentHTML(
+    DOMSelectors.container.insertAdjacentHTML(
         "beforeend",
         `<div class="world">
             <h2>World #${world.id}</h2>
@@ -155,13 +140,11 @@ function addCards(world) {
 };
 
 function resetContainer() {
-    let container = document.querySelector(".container")
-    container.innerHTML = '<div class="header-place">'
+    DOMSelectors.container.innerHTML = '<div class="header-place">'
 }
 
 function resetHTML() {
-    let header = document.querySelector(".header")
-    header.innerHTML = 
+    DOMSelectors.header.innerHTML = 
         `<h1>Hytopia Marketplace</h1>
         <div class="header-button">
             <button class="all">All</button>
@@ -170,12 +153,16 @@ function resetHTML() {
             <button class="rank">Sort by Rank</button>
             <button class="price">Sort by Price</button>
         </div>`
+    let all = document.querySelector(".all")
+    let id = document.querySelector(".id")
+    let rarity = document.querySelector(".rarity")
+    let rank = document.querySelector(".rank")
+    let price = document.querySelector(".price")
 }
 
 function addFormID() {
-    let header = document.querySelector(".header")
     resetHTML();
-    header.insertAdjacentHTML("beforeend", `
+    DOMSelectors.header.insertAdjacentHTML("beforeend", `
         <h3 class="requirement">Enter an ID Range:</h3>
     <form action="">
         <input class="input1" type="number" placeholder="Lower ID..." min="100" max="1000">
@@ -186,9 +173,8 @@ function addFormID() {
 }
 
 function addFormRarity() {
-    let header = document.querySelector(".header")
     resetHTML();
-    header.insertAdjacentHTML("beforeend", `
+    DOMSelectors.header.insertAdjacentHTML("beforeend", `
         <h3 class="requirement">Enter a Rarity:</h3>
     <form action="">
         <input class="input" type="text" placeholder="Enter Rarity...">
@@ -198,9 +184,8 @@ function addFormRarity() {
 }
 
 function addFormRank() {
-    let header = document.querySelector(".header")
     resetHTML();
-    header.insertAdjacentHTML("beforeend", `
+    DOMSelectors.header.insertAdjacentHTML("beforeend", `
         <h3 class="requirement">Enter a Rank Range:</h3>
     <form action="">
         <input class="input1" type="number" placeholder="Lower Rank..." min="0" max="10000">
@@ -211,9 +196,8 @@ function addFormRank() {
 }
 
 function addFormPrice() {
-    let header = document.querySelector(".header")
     resetHTML();
-    header.insertAdjacentHTML("beforeend", `
+    DOMSelectors.header.insertAdjacentHTML("beforeend", `
         <h3 class="requirement">Enter a Price Range:</h3>
     <form action="">
         <input class="input1" type="number" placeholder="Lower Price..." min="0" max="100">
