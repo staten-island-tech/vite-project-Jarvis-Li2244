@@ -1,17 +1,17 @@
 import '../CSS/style.css'
-import hytopiaWorlds from "../JS/worlds.js"
+import hWorlds from "../JS/worlds.js"
 
 const Worlds = [
-    {"id": 101, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Common", "price": 0.4596, "rank": 7855},
-    {"id": 102, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Uncommon", "price": 0.8923, "rank": 4321},
-    {"id": 103, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Rare", "price": 1.2375, "rank": 1254},
-    {"id": 104, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Epic", "price": 2.5000, "rank": 678},
-    {"id": 105, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Legendary", "price": 5.7500, "rank": 111},
-    {"id": 106, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Mythic", "price": 12.0000, "rank": 25},
-    {"id": 107, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Common", "price": 0.3500, "rank": 8000},
-    {"id": 108, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Uncommon", "price": 0.6500, "rank": 4500},
-    {"id": 109, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Rare", "price": 1.9000, "rank": 1340},
-    {"id": 110, "image": "../JS/images/HytopiaWorld1.png", "rarity": "Epic", "price": 3.3000, "rank": 567}
+    {"id": 101, "image": "../public/HytopiaWorld1.png", "rarity": "Common", "price": 0.4596, "rank": 7855},
+    {"id": 102, "image": "../public/HytopiaWorld2.png", "rarity": "Common", "price": 0.3500, "rank": 8000},
+    {"id": 103, "image": "../public/HytopiaWorld3.png", "rarity": "Rare", "price": 1.2375, "rank": 1254},
+    {"id": 104, "image": "../public/HytopiaWorld4.png", "rarity": "Epic", "price": 2.5000, "rank": 678},
+    {"id": 105, "image": "../public/HytopiaWorld5.png", "rarity": "Legendary", "price": 5.7500, "rank": 111},
+    {"id": 106, "image": "../public/HytopiaWorld6.png", "rarity": "Mythic", "price": 12.0000, "rank": 25},
+    {"id": 107, "image": "../public/HytopiaWorld7.png", "rarity": "Uncommon", "price": 0.8923, "rank": 4321},
+    {"id": 108, "image": "../public/HytopiaWorld8.png", "rarity": "Uncommon", "price": 0.6500, "rank": 4500},
+    {"id": 109, "image": "../public/HytopiaWorld9.png", "rarity": "Rare", "price": 1.9000, "rank": 1340},
+    {"id": 110, "image": "../public/HytopiaWorld10.png", "rarity": "Epic", "price": 3.3000, "rank": 567}
 ]
 
 const DOMSelectors = {
@@ -21,15 +21,14 @@ const DOMSelectors = {
     box: document.querySelector(".box"),
     header: document.querySelector(".header"),
     container: document.querySelector(".container"),
-    all: document.querySelector(".all"),
-    id: document.querySelector(".id"),
-    rarity: document.querySelector(".rarity"),
-    rank: document.querySelector(".rank"),
-    price: document.querySelector(".price"),
+    theme: document.querySelector(".buttonT"),
 }
 
-DOMSelectors.start.addEventListener("click", function(event) {
-    event.preventDefault();
+DOMSelectors.theme.addEventListener("click", function() {
+    themeSwitch();
+})
+
+DOMSelectors.start.addEventListener("click", function() {
     startMark();
 })
 
@@ -39,6 +38,16 @@ function startMark() {
     resetHeader();
 }
 
+function themeSwitch() {
+    let currentTheme = DOMSelectors.body.classList;
+    if (currentTheme.contains("dark")) {
+        currentTheme.add("light");
+        currentTheme.remove("dark");
+    } else {
+        currentTheme.add("dark");
+        currentTheme.remove("light");
+    }
+}
 
 function allButtons() {
     let all = document.querySelector(".all")
@@ -161,6 +170,7 @@ function resetHeader() {
 }
 
 function addForm(reqLabel, formType) {
+    resetHeader();
     if (formType == "text") {
         DOMSelectors.header.insertAdjacentHTML("beforeend", `
             <h3 class="requirement">${reqLabel}</h3>

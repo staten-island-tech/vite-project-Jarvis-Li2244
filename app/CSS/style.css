@@ -95,6 +95,7 @@ h4{
 button{
   margin-left: 0.5%;
   margin-right: 0.5%;
+  margin-top: 0.1%;
   padding: 0.1%;
   width: 10%;
   font-size: var(--h4);
@@ -163,7 +164,7 @@ input{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url("../JS/images/HytopiaBack.jpg");
+  background: url("../public/HytopiaBack.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   position: fixed;
