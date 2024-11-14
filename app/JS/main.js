@@ -28,12 +28,6 @@ const DOMSelectors = {
     price: document.querySelector(".price"),
 }
 
-let all = document.querySelector(".all")
-let id = document.querySelector(".id")
-let rarity = document.querySelector(".rarity")
-let rank = document.querySelector(".rank")
-let price = document.querySelector(".price")
-
 DOMSelectors.start.addEventListener("click", function(event) {
     event.preventDefault();
     startMark();
@@ -41,84 +35,93 @@ DOMSelectors.start.addEventListener("click", function(event) {
 
 function startMark() {
     DOMSelectors.box.remove();
-    allCards(Worlds)
+    allCards(Worlds);
+    resetHeader();
 }
 
 
-all.addEventListener("click", function(event) {
-    console.log("Test")
-    DOMSelectors.container.innerHTML = '<div class="header-place">';
-    allCards(Worlds);
-    }
-) 
+function allButtons() {
+    let all = document.querySelector(".all")
+    let id = document.querySelector(".id")
+    let rarity = document.querySelector(".rarity")
+    let rank = document.querySelector(".rank")
+    let price = document.querySelector(".price")
 
-id.addEventListener("click", function(event) {
-    addFormID();
-    let form = document.querySelector("form") 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        let input1 = document.querySelector(".input1").value
-        let input2 = document.querySelector(".input2").value
-        resetContainer();
-        resetHTML();
-        Worlds
-            .filter(world => world.id >= input1 && world.id <= input2)
-            .forEach(world => addCards(world))
-        }
-    )
-    }
-)       
 
-rarity.addEventListener("click", function(event) {
-    addFormRarity();
-    let form = document.querySelector("form") 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        let input = document.querySelector(".input").value
+    all.addEventListener("click", function() {
         resetContainer();
-        resetHTML();
-        Worlds
-            .filter(world => world.rarity == input)
-            .forEach(world => addCards(world))
+        resetHeader();
+        allCards(Worlds);
         }
-    )
-    }
-)       
+    ) 
 
-rank.addEventListener("click", function(event) {
-    addFormRank();
-    let form = document.querySelector("form") 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        let input1 = document.querySelector(".input1").value
-        let input2 = document.querySelector(".input2").value
-        resetContainer();
-        resetHTML();
-        Worlds
-            .filter(world => world.rank >= input1 && world.rank <= input2)
-            .forEach(world => addCards(world))
-        }
-    )
-    }
-)       
+    id.addEventListener("click", function() {
+        addForm("Enter an ID Range:", "number");
+        let form = document.querySelector("form") 
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let input1 = document.querySelector(".input1").value
+            let input2 = document.querySelector(".input2").value
+            resetContainer();
+            resetHeader();
+            Worlds
+                .filter(world => world.id >= input1 && world.id <= input2)
+                .forEach(world => addCards(world))
+            }
+        )
+        }   
+    )       
 
-price.addEventListener("click", function(event) {
-    addFormPrice();
-    let form = document.querySelector("form") 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
-        let input1 = document.querySelector(".input1").value
-        let input2 = document.querySelector(".input2").value
-        resetContainer();
-        resetHTML();
-        Worlds
-            .filter(world => world.price >= input1 && world.price <= input2)
-            .forEach(world => addCards(world))
-        event.target.reset()
+    rarity.addEventListener("click", function() {
+        addForm("Enter a Rarity:", "text");
+        let form = document.querySelector("form") 
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let input1 = document.querySelector(".input1").value
+            resetContainer();
+            resetHeader();
+            Worlds
+                .filter(world => world.rarity == input1)
+                .forEach(world => addCards(world))
+            }
+        )
         }
-    )
-    }
-)       
+    )       
+
+    rank.addEventListener("click", function() {
+        addForm("Enter a Rank Range:", "number");
+        let form = document.querySelector("form") 
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let input1 = document.querySelector(".input1").value
+            let input2 = document.querySelector(".input2").value
+            resetContainer();
+            resetHeader();
+            Worlds
+                .filter(world => world.rank >= input1 && world.rank <= input2)
+                .forEach(world => addCards(world))
+            }
+        )
+        }
+    )       
+
+    price.addEventListener("click", function() {
+        addForm("Enter a Price Range:", "number");
+        let form = document.querySelector("form") 
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let input1 = document.querySelector(".input1").value
+            let input2 = document.querySelector(".input2").value
+            resetContainer();
+            resetHeader();
+            Worlds
+                .filter(world => world.price >= input1 && world.price <= input2)
+                .forEach(world => addCards(world))
+            }
+        )
+        }
+    )       
+}
 
 function allCards(array) {
     array.forEach(world => addCards(world))
@@ -141,9 +144,10 @@ function addCards(world) {
 
 function resetContainer() {
     DOMSelectors.container.innerHTML = '<div class="header-place">'
+    allButtons();
 }
 
-function resetHTML() {
+function resetHeader() {
     DOMSelectors.header.innerHTML = 
         `<h1>Hytopia Marketplace</h1>
         <div class="header-button">
@@ -153,56 +157,26 @@ function resetHTML() {
             <button class="rank">Sort by Rank</button>
             <button class="price">Sort by Price</button>
         </div>`
-    let all = document.querySelector(".all")
-    let id = document.querySelector(".id")
-    let rarity = document.querySelector(".rarity")
-    let rank = document.querySelector(".rank")
-    let price = document.querySelector(".price")
+    allButtons();
 }
 
-function addFormID() {
-    resetHTML();
-    DOMSelectors.header.insertAdjacentHTML("beforeend", `
-        <h3 class="requirement">Enter an ID Range:</h3>
-    <form action="">
-        <input class="input1" type="number" placeholder="Lower ID..." min="100" max="1000">
-        <input class="input2" type="number" placeholder="Higher ID..."  min="100" max="1000">
-        <button>Submit</button>  
-    </form>
-    </div>`);
-}
-
-function addFormRarity() {
-    resetHTML();
-    DOMSelectors.header.insertAdjacentHTML("beforeend", `
-        <h3 class="requirement">Enter a Rarity:</h3>
-    <form action="">
-        <input class="input" type="text" placeholder="Enter Rarity...">
-        <button>Submit</button>  
-    </form>
-    </div>`);
-}
-
-function addFormRank() {
-    resetHTML();
-    DOMSelectors.header.insertAdjacentHTML("beforeend", `
-        <h3 class="requirement">Enter a Rank Range:</h3>
-    <form action="">
-        <input class="input1" type="number" placeholder="Lower Rank..." min="0" max="10000">
-        <input class="input2" type="number" placeholder="Higher Rank..."  min="0" max="10000">
-        <button>Submit</button>  
-    </form>
-    </div>`);
-}
-
-function addFormPrice() {
-    resetHTML();
-    DOMSelectors.header.insertAdjacentHTML("beforeend", `
-        <h3 class="requirement">Enter a Price Range:</h3>
-    <form action="">
-        <input class="input1" type="number" placeholder="Lower Price..." min="0" max="100">
-        <input class="input2" type="number" placeholder="Higher Price..." min="0" max="100">
-        <button>Submit</button>  
-    </form>
-    </div>`);
+function addForm(reqLabel, formType) {
+    if (formType == "text") {
+        DOMSelectors.header.insertAdjacentHTML("beforeend", `
+            <h3 class="requirement">${reqLabel}</h3>
+        <form action="">
+            <input class="input1" type="text" placeholder="Enter Rarity...">
+            <button>Submit</button>  
+        </form>
+        </div>`);
+    } else {
+        DOMSelectors.header.insertAdjacentHTML("beforeend", `
+            <h3 class="requirement">${reqLabel}</h3>
+        <form action="">
+            <input class="input1" type="number" placeholder="Minimum...">
+            <input class="input2" type="number" placeholder="Maximum...">
+            <button>Submit</button>  
+        </form>
+        </div>`);
+    }
 }
