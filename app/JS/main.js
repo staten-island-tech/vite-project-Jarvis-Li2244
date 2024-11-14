@@ -1,18 +1,5 @@
 import '../CSS/style.css'
-import hWorlds from "../JS/worlds.js"
-
-const Worlds = [
-    {"id": 101, "image": "HytopiaWorld1.png", "rarity": "Common", "price": 0.4596, "rank": 7855},
-    {"id": 102, "image": "HytopiaWorld2.png", "rarity": "Common", "price": 0.3500, "rank": 8000},
-    {"id": 103, "image": "HytopiaWorld3.png", "rarity": "Rare", "price": 1.2375, "rank": 1254},
-    {"id": 104, "image": "HytopiaWorld4.png", "rarity": "Epic", "price": 2.5000, "rank": 678},
-    {"id": 105, "image": "HytopiaWorld5.png", "rarity": "Legendary", "price": 5.7500, "rank": 111},
-    {"id": 106, "image": "HytopiaWorld6.png", "rarity": "Mythic", "price": 12.0000, "rank": 25},
-    {"id": 107, "image": "HytopiaWorld7.png", "rarity": "Uncommon", "price": 0.8923, "rank": 4321},
-    {"id": 108, "image": "HytopiaWorld8.png", "rarity": "Uncommon", "price": 0.6500, "rank": 4500},
-    {"id": 109, "image": "HytopiaWorld9.png", "rarity": "Rare", "price": 1.9000, "rank": 1340},
-    {"id": 110, "image": "HytopiaWorld10.png", "rarity": "Epic", "price": 3.3000, "rank": 567}
-]
+import {Worlds} from "../JS/worlds.js"
 
 const DOMSelectors = {
     html: document.querySelector("html"),
@@ -90,8 +77,11 @@ function allButtons() {
             resetContainer();
             resetHeader();
             Worlds
-                .filter(world => world.rarity == input1)
-                .forEach(world => addCards(world))
+                .forEach(world => {if (world.rarity.includes(input1)) {
+                    addCards(world)
+                }
+                }
+                )
             }
         )
         }
@@ -142,7 +132,7 @@ function addCards(world) {
         `<div class="world">
             <h2>World #${world.id}</h2>
             <div class="imageholder">
-                <img src="${world.image}" alt="World Image" class="image">
+                <img src="${world.image}" alt="${world.altText}" class="image">
             </div>
             <h3>${world.rarity}</h3>
             <h4>Rank: ${world.rank}/10000</h4>
